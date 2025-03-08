@@ -80,7 +80,10 @@ a {
 
 .central-wrapper {
   max-width: 1200px;
-  margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 .flex-center {
@@ -931,4 +934,16 @@ a {
     opacity: 0;
     display: none;
   }
+}
+
+
+
+@media (max-width: 850px){
+
+
+  .inner-content-wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+  
 }
