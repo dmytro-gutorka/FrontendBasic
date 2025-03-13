@@ -1,0 +1,1302 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "cera_prolight";
+  src: url("../fonts/cerapro-light-webfont.eot");
+  src: url("../fonts/cerapro-light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/cerapro-light-webfont.woff2") format("woff2"), url("../fonts/cerapro-light-webfont.woff") format("woff"), url("../fonts/cerapro-light-webfont.ttf") format("truetype"), url("../fonts/cerapro-light-webfont.svg#cera_prolight") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "cera_proregular";
+  src: url("../fonts/cerapro-regular-webfont.eot");
+  src: url("../fonts/cerapro-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/cerapro-regular-webfont.woff2") format("woff2"), url("../fonts/cerapro-regular-webfont.woff") format("woff"), url("../fonts/cerapro-regular-webfont.ttf") format("truetype"), url("../fonts/cerapro-regular-webfont.svg#cera_proregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "cera_promedium";
+  src: url("../fonts/cerapro-medium-webfont.eot");
+  src: url("../fonts/cerapro-medium-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/cerapro-medium-webfont.woff2") format("woff2"), url("../fonts/cerapro-medium-webfont.woff") format("woff"), url("../fonts/cerapro-medium-webfont.ttf") format("truetype"), url("../fonts/cerapro-medium-webfont.svg#cera_promedium") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "cera_probold";
+  src: url("../fonts/cerapro-bold-webfont.eot");
+  src: url("../fonts/cerapro-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/cerapro-bold-webfont.woff2") format("woff2"), url("../fonts/cerapro-bold-webfont.woff") format("woff"), url("../fonts/cerapro-bold-webfont.ttf") format("truetype"), url("../fonts/cerapro-bold-webfont.svg#cera_probold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "cera_problack";
+  src: url("../fonts/cerapro-black-webfont.eot");
+  src: url("../fonts/cerapro-black-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/cerapro-black-webfont.woff2") format("woff2"), url("../fonts/cerapro-black-webfont.woff") format("woff"), url("../fonts/cerapro-black-webfont.ttf") format("truetype"), url("../fonts/cerapro-black-webfont.svg#cera_problack") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+a {
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+}
+
+@keyframes fill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes fade_out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+header {
+  padding-top: 30px;
+}
+header .login {
+  font-family: "Cera Pro", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+  padding: 7px 17px;
+  background: #46a358;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+header .login:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/Logout.svg");
+  margin-right: 4px;
+}
+header .logo {
+  margin-bottom: 18px;
+}
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.3px solid rgba(70, 163, 88, 0.5);
+  margin-bottom: 12px;
+}
+@media screen and (max-width: 1024px) {
+  header .container {
+    padding: 6px 16px;
+  }
+}
+@media screen and (max-width: 540px) {
+  header nav {
+    display: none;
+  }
+}
+header nav ul {
+  display: flex;
+  gap: 50px;
+}
+header nav a {
+  font-family: "Cera Pro", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #3d3d3d;
+}
+header nav li:after {
+  display: block;
+  width: 0;
+  content: "";
+  background-color: #46a358;
+  height: 3px;
+  margin-top: 25px;
+  transition: 0.4s;
+}
+header nav li:hover:after {
+  width: 100%;
+}
+
+main .preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  animation: fade_out 1s ease-out 2s forwards;
+  pointer-events: none;
+  /*ease-out - анімація починається швидко, але поступово сповільнюється ближче до завершення.*/
+  /*forwards - елемент зберігатиме кінцевий стан анімації після її завершення.*/
+}
+main .preloader .spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ccc;
+  border-top: 5px solid #2b6f3a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+main .banner {
+  margin-bottom: 26px;
+}
+main .banner .container {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(245, 245, 245, 0.5) 0%, rgba(245, 245, 245, 0.5) 100%);
+}
+main .banner .plants {
+  width: 507px;
+}
+@media screen and (max-width: 1024px) {
+  main .banner .plants {
+    width: 45%;
+  }
+}
+@media screen and (max-width: 820px) {
+  main .banner .plants {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 430px) {
+  main .banner .plants {
+    width: 300px;
+    margin: auto;
+  }
+}
+main .banner .welcom {
+  font-family: "cera_promedium";
+  display: inline-block;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 114%;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #3d3d3d;
+  margin-bottom: 7px;
+}
+main .banner .greenshop_information {
+  font-family: "Cera Pro", sans-serif;
+  max-width: 557px;
+  padding: 40px;
+}
+@media screen and (max-width: 820px) {
+  main .banner .greenshop_information {
+    max-width: 380px;
+  }
+}
+main .banner .slogan {
+  font-weight: 900;
+  font-size: 70px;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: #3d3d3d;
+  margin-bottom: 5px;
+}
+@media screen and (max-width: 820px) {
+  main .banner .slogan {
+    font-weight: 900;
+    font-size: 60px;
+  }
+}
+main .banner .planet {
+  color: #46a358;
+}
+main .banner .shop_description {
+  font-family: "cera_proregular";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 171%;
+  color: #727272;
+  margin-bottom: 44px;
+}
+main .banner .shop_now {
+  font-family: "cera_probold";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  padding: 11px 27px;
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 6px;
+  background: #46a358;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+main .banner .shop_now span {
+  position: relative;
+  z-index: 1;
+}
+main .banner .shop_now::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #2b6f3a;
+  z-index: 0;
+}
+main .banner .shop_now:hover::before {
+  animation: fill 1s;
+}
+main .product .main_content_flex {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 90px;
+}
+main .product .left_side {
+  max-width: 320px;
+  background: #fbfbfb;
+}
+@media screen and (max-width: 1024px) {
+  main .product .left_side {
+    margin: auto;
+    margin-bottom: 20px;
+  }
+}
+main .product .categories {
+  font-family: "cera_proregular";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 89%;
+  color: #3d3d3d;
+  margin-bottom: 7px;
+  margin-left: 18px;
+  padding-top: 14px;
+}
+main .product .plants_kinds {
+  margin-bottom: 240px;
+}
+main .product .plants_kinds li {
+  margin-left: 30px;
+  font-family: "cera_prolight";
+  margin-bottom: 7px;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 267%;
+  color: #46a358;
+}
+main .product .plants_kinds li a {
+  color: #3d3d3d;
+  transition: 0.4s;
+}
+main .product .plants_kinds li a:hover {
+  color: #46a358;
+}
+main .product .right-side {
+  max-width: 840px;
+}
+@media screen and (max-width: 1024px) {
+  main .product .right-side {
+    margin: auto;
+  }
+}
+@media screen and (max-width: 540px) {
+  main .product .right-side {
+    padding: 0 10px;
+  }
+}
+main .product .sorting {
+  font-family: "cera_proregular";
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 107%;
+  color: #3d3d3d;
+}
+main .product .main_product_items {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 820px) {
+  main .product .main_product_items {
+    padding: 6px;
+  }
+}
+@media screen and (max-width: 540px) {
+  main .product .main_product_items {
+    justify-content: center;
+  }
+}
+main .product .main_product_items ul {
+  position: absolute;
+  display: none;
+  gap: 10px;
+  bottom: 57px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 125px;
+}
+main .product .main_product_items li {
+  background-color: white;
+  border-radius: 4px;
+  padding: 6px;
+}
+main .product article {
+  max-width: 258px;
+  margin-bottom: 70px;
+  border-top: solid 1px transparent;
+  position: relative;
+}
+@media screen and (max-width: 540px) {
+  main .product article:not(:nth-of-type(2n)) {
+    margin-right: 10px;
+  }
+}
+main .product article .sale {
+  position: absolute;
+  background-color: #46a358;
+  padding: 7px 9px;
+  left: 0;
+  top: 14px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  color: #fff;
+  font-family: "cera_promedium";
+}
+main .product article:hover {
+  border-top: solid 1px #46a358;
+}
+main .product article:hover ul {
+  display: flex;
+}
+main .product .price {
+  font-family: "cera_probold";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 89%;
+  color: #46a358;
+}
+main .product .price span {
+  font-family: "cera_proregular";
+  text-decoration: line-through;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 89%;
+  color: #a5a5a5;
+  margin-left: 17px;
+}
+main .product .product_img {
+  background: #fbfbfb;
+  margin-bottom: 12px;
+}
+main .product .product_name {
+  font-family: "cera_proregular";
+  margin-bottom: 6px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  color: #3d3d3d;
+}
+main .product .product_sort {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 107%;
+  flex-wrap: wrap;
+  color: #3d3d3d;
+}
+@media screen and (max-width: 1024px) {
+  main .product .product_sort {
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+}
+main .product .product_sort ul {
+  display: flex;
+}
+main .product .product_sort li {
+  font-family: "cera_proregular";
+  margin-right: 40px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 107%;
+  color: #3d3d3d;
+}
+@media screen and (max-width: 430px) {
+  main .product .product_sort li {
+    margin: 0 16px;
+  }
+}
+main .product .product_sort li a {
+  transition: 0.4s;
+}
+main .product .product_sort li a:hover {
+  color: #46a358;
+}
+main .product .product_sort li:after {
+  display: block;
+  width: 0;
+  content: "";
+  background-color: #46a358;
+  height: 3px;
+  margin-top: 1px;
+  transition: 0.4s;
+}
+main .product .product_sort li:hover:after {
+  width: 100%;
+}
+main .product .product_sort p:after {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 12px;
+  background-image: url("../img/Arrow - Down 2.svg");
+  margin-left: 2px;
+}
+main .information {
+  margin-bottom: 138px;
+}
+main .information .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 820px) {
+  main .information .container {
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 540px) {
+  main .information img {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 430px) {
+  main .information img {
+    width: 60%;
+  }
+}
+main .information a {
+  display: inline-flex;
+  align-items: center;
+  font-family: "cera_prolight";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  padding: 11px 28px;
+  color: #fff;
+  border-radius: 6px;
+  background: #46a358;
+}
+@media screen and (max-width: 430px) {
+  main .information a {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
+main .information a:after {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-image: url("../img/Arrow - Right.svg");
+  margin-right: 6px;
+}
+main .information article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: right;
+  max-width: 586px;
+  background: #fbfbfb;
+}
+@media screen and (max-width: 1024px) {
+  main .information article {
+    max-width: 500px;
+    margin-bottom: 64px;
+    padding: 10px 0;
+  }
+}
+@media screen and (max-width: 820px) {
+  main .information article {
+    max-width: 586px;
+    margin-bottom: 64px;
+    padding: 10px 0;
+  }
+}
+@media screen and (max-width: 540px) {
+  main .information article {
+    margin-bottom: 64px;
+    padding: 10px 0;
+  }
+}
+main .information h4 {
+  font-family: "cera_problack";
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 133%;
+  text-transform: uppercase;
+  text-align: right;
+  color: #3d3d3d;
+  margin-bottom: 9px;
+}
+main .information p {
+  font-family: "cera_prolight";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 171%;
+  text-align: right;
+  color: #727272;
+  margin-bottom: 25px;
+}
+main .information .product_overview {
+  max-width: 292px;
+  margin-right: 30px;
+}
+main .blog_posts {
+  margin-bottom: 100px;
+}
+main .blog_posts .container {
+  padding-bottom: 100px;
+}
+main .blog_posts h2 {
+  font-family: "cera_probold";
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 53%;
+  text-align: center;
+  color: #3d3d3d;
+  margin-bottom: 15px;
+}
+@media screen and (max-width: 430px) {
+  main .blog_posts h2 {
+    font-size: 28px;
+  }
+}
+main .blog_posts .online_plant_shop {
+  font-family: "cera_proregular";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 171%;
+  text-align: center;
+  color: #727272;
+  margin-bottom: 35px;
+}
+@media screen and (max-width: 430px) {
+  main .blog_posts .online_plant_shop {
+    padding: 0 4px;
+  }
+}
+main .blog_posts .posts {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 1024px) {
+  main .blog_posts .posts {
+    justify-content: space-around;
+  }
+}
+@media screen and (max-width: 540px) {
+  main .blog_posts .posts {
+    justify-content: center;
+  }
+}
+main .blog_posts .posts article {
+  max-width: 268px;
+  padding-bottom: 13px;
+  background: #fbfbfb;
+}
+@media screen and (max-width: 1024px) {
+  main .blog_posts .posts article:not(:last-of-type) {
+    margin-bottom: 34px;
+  }
+}
+@media screen and (max-width: 540px) {
+  main .blog_posts .posts article:not(:nth-of-type(2n)) {
+    margin-right: 3px;
+  }
+}
+@media screen and (max-width: 430px) {
+  main .blog_posts .posts article {
+    margin-bottom: 35px;
+  }
+}
+main .blog_posts .article_information {
+  text-align: left;
+  margin-left: 15px;
+}
+@media screen and (max-width: 540px) {
+  main .blog_posts .article_information {
+    margin-left: 10px;
+  }
+}
+main .blog_posts .green_text {
+  font-family: "cera_promedium";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 114%;
+  color: #46a358;
+  margin-bottom: 4px;
+}
+main .blog_posts h3 {
+  font-family: "cera_probold";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 130%;
+  color: #3d3d3d;
+  margin-bottom: 9px;
+}
+@media screen and (max-width: 540px) {
+  main .blog_posts h3 {
+    font-size: 17px;
+  }
+}
+main .blog_posts img {
+  margin-bottom: 9px;
+}
+main .blog_posts .article_text {
+  font-family: "cera_proregular";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 157%;
+  color: #727272;
+  margin-bottom: 9px;
+}
+main .blog_posts a {
+  font-family: "cera_promedium";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 114%;
+  color: #3d3d3d;
+  display: flex;
+  align-items: center;
+}
+main .blog_posts a:hover {
+  color: #46a358;
+}
+main .blog_posts a:hover:after {
+  background-image: url("../img/ArrowStraight - RightGreen.svg");
+}
+main .blog_posts a:after {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-image: url("../img/ArrowStraight - Right.svg");
+  margin-right: 9px;
+  transition: 0.4s;
+}
+main .contact_data .data {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: #fbfbfb;
+}
+@media screen and (max-width: 540px) {
+  main .contact_data .data {
+    justify-content: center;
+  }
+}
+main .contact_data .data article {
+  position: relative;
+  max-width: 204px;
+}
+@media screen and (max-width: 430px) {
+  main .contact_data .data article:last-of-type {
+    margin-bottom: 64px;
+  }
+}
+@media screen and (max-width: 820px) {
+  main .contact_data .data article {
+    margin-bottom: 64px;
+  }
+}
+main .contact_data .data article:not(:last-of-type)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  width: 187px;
+  height: 1px;
+  background: rgba(70, 163, 88, 0.1);
+  transform: rotate(90deg);
+}
+@media screen and (max-width: 1024px) {
+  main .contact_data .data article:not(:last-of-type)::after {
+    left: 55%;
+  }
+}
+@media screen and (max-width: 820px) {
+  main .contact_data .data article:not(:last-of-type)::after {
+    left: 70%;
+  }
+}
+@media screen and (max-width: 540px) {
+  main .contact_data .data article:not(:last-of-type)::after {
+    display: none;
+  }
+}
+main .contact_data .data article img {
+  margin-bottom: 15px;
+}
+main .contact_data .data article p {
+  font-family: cera_proregular;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 157%;
+  color: #727272;
+}
+main .contact_data .data article h4 {
+  font-family: "cera_probold";
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 94%;
+  color: #3d3d3d;
+  margin-bottom: 9px;
+}
+main .contact_data .form_desc {
+  max-width: 354px;
+}
+@media screen and (max-width: 1024px) {
+  main .contact_data .form_desc {
+    max-width: 320px;
+  }
+}
+@media screen and (max-width: 820px) {
+  main .contact_data .form_desc {
+    max-width: 354px;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 430px) {
+  main .contact_data .form_desc {
+    max-width: 96%;
+  }
+}
+main .contact_data .form_desc h4 {
+  font-family: "cera_probold";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 89%;
+  color: #3d3d3d;
+  margin-bottom: 25px;
+}
+main .contact_data .form_desc p {
+  font-family: cera_proregular;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 169%;
+  color: #727272;
+}
+main .contact_data form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+main .contact_data form input {
+  border-radius: 6px 0 0 6px;
+  width: 354px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.06);
+  background: #fff;
+  border: none;
+  font-family: cera_proregular;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 114%;
+  color: #acacac;
+  padding-left: 11px;
+}
+main .contact_data form button {
+  border-radius: 0 6px 6px 0;
+  width: 85px;
+  background: #46a358;
+  border: none;
+  font-family: "cera_probold";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 89%;
+  color: #fff;
+  padding: 12px 25px;
+}
+main .contact_data .gradient {
+  background: linear-gradient(90deg, #edf6ef 0%, #52c368 100%);
+  padding: 23px;
+}
+main .contact_data .gradient ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 540px) {
+  main .contact_data .gradient ul {
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+main .contact_data .gradient li {
+  max-width: 205px;
+  font-family: cera_proregular;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 157%;
+  color: #3d3d3d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media screen and (max-width: 540px) {
+  main .contact_data .gradient li {
+    margin-bottom: 10px;
+  }
+}
+main .contact_data .gradient li.location:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/Icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-right: 14px;
+}
+main .contact_data .gradient li.email_info:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/Icon (1).svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-right: 8px;
+}
+main .contact_data .gradient li.phone:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/Icon (2).svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-right: 8px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+.container .list_pager {
+  font-family: "cera_proregular";
+  display: flex;
+  justify-content: right;
+  gap: 10px;
+  max-width: 100%;
+  margin-bottom: 94px;
+}
+@media screen and (max-width: 1024px) {
+  .container .list_pager {
+    margin-bottom: 64px;
+    justify-content: center;
+  }
+}
+.container .list_pager li a {
+  font-family: "cera_proregular";
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 175%;
+  color: #3d3d3d;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  transition: 0.4s;
+}
+.container .list_pager li a:hover {
+  background-color: #46a358;
+  color: white;
+}
+.container .list_pager li:last-of-type a {
+  background-image: url("../img/Arrow - Right 2.svg");
+  background-size: contain;
+}
+.container .list_pager li:last-of-type:hover a {
+  background-image: url("../img/Arrow - Right_white.svg");
+}
+
+.product .main_product_items li.image1 a:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/shopping 1.svg");
+  transition: 0.4s;
+}
+.product .main_product_items li.image1 a:hover:before {
+  background-image: url("../img/shopping 1 Green.svg");
+}
+.product .main_product_items li.image2 a:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/heart 1.svg");
+}
+.product .main_product_items li.image2 a:hover:before {
+  background-image: url("../img/heart 1 Green.svg");
+}
+.product .main_product_items li.image3 a:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/Frame.svg");
+}
+.product .main_product_items li.image3 a:hover:before {
+  background-image: url("../img/Frame Green.svg");
+}
+
+footer .container {
+  background: #fbfbfb;
+  display: flex;
+  justify-content: space-between;
+  padding: 33px 25px;
+  position: relative;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+footer .container::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(70, 163, 88, 0.2);
+}
+footer .lists h4 {
+  font-family: cera_proregular;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 89%;
+  color: #3d3d3d;
+  padding-bottom: 8px;
+}
+@media screen and (max-width: 430px) {
+  footer .lists h4 {
+    font-size: 16px;
+  }
+}
+footer .lists li {
+  font-family: cera_proregular;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 214%;
+  color: #3d3d3d;
+  transition: 0.3s;
+}
+footer .lists li a:hover {
+  color: #46a358;
+}
+@media screen and (max-width: 540px) {
+  footer .media {
+    margin: auto;
+    margin-top: 24px;
+  }
+}
+footer .media .social_media {
+  font-family: cera_proregular;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 89%;
+  color: #3d3d3d;
+  padding-bottom: 20px;
+}
+@media screen and (max-width: 540px) {
+  footer .media .social_media {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 430px) {
+  footer .media .social_media {
+    text-align: center;
+    font-size: 16px;
+  }
+}
+footer .media .payments {
+  font-family: cera_proregular;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 89%;
+  color: #3d3d3d;
+  padding-bottom: 13px;
+}
+@media screen and (max-width: 540px) {
+  footer .media .payments {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 430px) {
+  footer .media .payments {
+    text-align: center;
+    font-size: 16px;
+  }
+}
+footer .media ul {
+  display: flex;
+  justify-content: space-between;
+  max-width: 190px;
+  margin-bottom: 33px;
+}
+@media screen and (max-width: 540px) {
+  footer .media ul {
+    margin: 0 auto 33px;
+  }
+}
+footer .media li a {
+  border: 1px solid rgba(70, 163, 88, 0.2);
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+footer .media li a .icon {
+  width: 60%;
+  height: 60%;
+}
+footer .rights {
+  font-family: "cera_proregular";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 214%;
+  color: #3d3d3d;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+header nav .dropdown {
+  position: relative;
+}
+header nav .dropdown:hover .sub_menu {
+  display: flex;
+}
+header nav .sub_menu {
+  position: absolute;
+  min-width: 188px;
+  flex-direction: column;
+  gap: 0;
+  top: 40px;
+  display: none;
+  padding-top: 20px;
+}
+header nav .sub_menu li {
+  background-color: #edf6ee;
+}
+header nav .sub_menu li:after {
+  display: none;
+}
+header nav .sub_menu li:hover {
+  background-color: #1a712a;
+}
+header nav .sub_menu li:hover > a {
+  color: #fff;
+}
+header nav .sub_menu a {
+  padding: 7px 14px;
+  display: block;
+  font-family: "cera_proregular";
+  font-weight: 400;
+  font-size: 16px;
+  color: #3d3d3d;
+}
+header nav .sub_menu li.dropdown_2:after {
+  content: "";
+  display: block;
+  background-image: url("../img/Frame 9.svg");
+  width: 7px;
+  height: 10px;
+  position: absolute;
+  top: 10px;
+  right: 19px;
+  margin-top: 0;
+  transition: 0.2s;
+  background-color: #edf6ee;
+}
+header nav .sub_menu li.dropdown_2:hover:after {
+  transform: rotate(180deg);
+  background-color: #1a712a;
+  background-image: url("../img/Frame 9White.svg");
+}
+header nav .dropdown_2 {
+  position: relative;
+}
+header nav .dropdown_2:hover .sub_menu_2 {
+  display: flex;
+}
+header nav .dropdown_2 li:hover {
+  background-color: #1a712a;
+}
+header nav .dropdown_2 li:hover a {
+  color: #fff;
+}
+header nav .sub_menu_2 {
+  position: absolute;
+  min-width: 188px;
+  flex-direction: column;
+  gap: 0;
+  top: -110px;
+  left: 100%;
+  display: none;
+  padding-top: 20px;
+  padding-left: 2px;
+}
+
+.box {
+  max-width: 500px;
+  border: solid 2px black;
+  margin: auto;
+  padding: 50px 100px;
+}
+.box h1 {
+  max-width: 157px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "cera_promedium";
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 80%;
+  color: #3d3d3d;
+  margin: auto;
+  margin-bottom: 40px;
+  position: relative;
+}
+.box h1 span {
+  color: #46a358;
+}
+.box h1::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 42%;
+  transform: translate(-50%, -50%);
+  width: 1px;
+  height: 12px;
+  background-color: #3d3d3d;
+}
+.box p {
+  font-family: "cera_proregular";
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 123%;
+  color: #3d3d3d;
+  text-align: center;
+  margin-bottom: 14px;
+}
+.box form {
+  width: 300px;
+  margin: auto;
+  text-align: center;
+}
+.box form input {
+  font-family: "cera_proregular";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 114%;
+  color: #a5a5a5;
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  width: 300px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+.box form button {
+  border: 1px solid #46a358;
+  border-radius: 5px;
+  width: 300px;
+  padding: 15px 118px;
+  background: #46a358;
+  margin-bottom: 36px;
+  font-family: "cera_proregular";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  color: #fff;
+}
+.box .register {
+  width: 300px;
+  font-family: "cera_promedium";
+  margin-bottom: 27px;
+  text-align: center;
+  position: relative;
+}
+.box .register::before {
+  content: "";
+  position: absolute;
+  border: 1px solid #eaeaea;
+  width: 95px;
+  height: 0;
+  top: 50%;
+  left: 0;
+}
+.box .register::after {
+  content: "";
+  position: absolute;
+  border: 1px solid #eaeaea;
+  width: 95px;
+  height: 0;
+  top: 50%;
+  right: 0;
+}
+.box a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #727272;
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 15px;
+  font-family: "cera_promedium";
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 123%;
+  text-align: center;
+}
+.box a img {
+  width: 20px;
+  height: 20px;
+  margin-right: 9px;
+}
+
+/*# sourceMappingURL=style_preproc.css.map */

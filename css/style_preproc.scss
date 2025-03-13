@@ -1,0 +1,1305 @@
+@font-face {
+  font-family: 'cera_prolight';
+  src: url('../fonts/cerapro-light-webfont.eot');
+  src: url('../fonts/cerapro-light-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/cerapro-light-webfont.woff2') format('woff2'),
+  url('../fonts/cerapro-light-webfont.woff') format('woff'),
+  url('../fonts/cerapro-light-webfont.ttf') format('truetype'),
+  url('../fonts/cerapro-light-webfont.svg#cera_prolight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'cera_proregular';
+  src: url('../fonts/cerapro-regular-webfont.eot');
+  src: url('../fonts/cerapro-regular-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/cerapro-regular-webfont.woff2') format('woff2'),
+  url('../fonts/cerapro-regular-webfont.woff') format('woff'),
+  url('../fonts/cerapro-regular-webfont.ttf') format('truetype'),
+  url('../fonts/cerapro-regular-webfont.svg#cera_proregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'cera_promedium';
+  src: url('../fonts/cerapro-medium-webfont.eot');
+  src: url('../fonts/cerapro-medium-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/cerapro-medium-webfont.woff2') format('woff2'),
+  url('../fonts/cerapro-medium-webfont.woff') format('woff'),
+  url('../fonts/cerapro-medium-webfont.ttf') format('truetype'),
+  url('../fonts/cerapro-medium-webfont.svg#cera_promedium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'cera_probold';
+  src: url('../fonts/cerapro-bold-webfont.eot');
+  src: url('../fonts/cerapro-bold-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/cerapro-bold-webfont.woff2') format('woff2'),
+  url('../fonts/cerapro-bold-webfont.woff') format('woff'),
+  url('../fonts/cerapro-bold-webfont.ttf') format('truetype'),
+  url('../fonts/cerapro-bold-webfont.svg#cera_probold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'cera_problack';
+  src: url('../fonts/cerapro-black-webfont.eot');
+  src: url('../fonts/cerapro-black-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/cerapro-black-webfont.woff2') format('woff2'),
+  url('../fonts/cerapro-black-webfont.woff') format('woff'),
+  url('../fonts/cerapro-black-webfont.ttf') format('truetype'),
+  url('../fonts/cerapro-black-webfont.svg#cera_problack') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+$main-color: #46a358;
+$gray-shade: #3d3d3d;
+@mixin max-screen($res) {
+  @media screen and (max-width: $res) {
+    @content;
+  }
+}
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+a{
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+}
+@keyframes fill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes fade_out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+header{
+  padding-top: 30px;
+  .login{
+    font-family: "Cera Pro", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 7px 17px;
+    background: $main-color;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+    &:before{
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-image: url("../img/Logout.svg");
+      margin-right: 4px;
+    }
+  }
+  .logo{
+    margin-bottom: 18px;
+  }
+  .container{
+    @include max-screen(1024px){
+      padding: 6px 16px;
+    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.30px solid rgba(70, 163, 88, 0.5);
+    margin-bottom: 12px;
+  }
+  nav{
+    @include max-screen(540px){
+      display: none;
+    }
+    ul{
+      display: flex;
+      gap: 50px;
+    }
+    a{
+      font-family: "Cera Pro", sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: $gray-shade;
+    }
+    li{
+      &:after{
+        display: block;
+        width: 0;
+        content: "";
+        background-color: $main-color;
+        height: 3px;
+        margin-top: 25px;
+        transition: 0.4s;
+      }
+      &:hover:after{
+        width: 100%;
+      }
+    }
+  }
+}
+main{
+  .preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    animation: fade_out 1s ease-out 2s forwards;
+    pointer-events: none;
+    /*ease-out - анімація починається швидко, але поступово сповільнюється ближче до завершення.*/
+    /*forwards - елемент зберігатиме кінцевий стан анімації після її завершення.*/
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #ccc;
+      border-top: 5px solid #2b6f3a;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+  .banner{
+    margin-bottom: 26px;
+    .container{
+      flex-wrap: wrap;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(245, 245, 245, 0.5) 0%, rgba(245, 245, 245, 0.5) 100%);
+    }
+    .plants{
+      width: 507px;
+      @include max-screen(1024px){
+        width: 45%
+      }
+      @include max-screen(820px){
+        width: 50%
+      }
+      @include max-screen(430px){
+        width: 300px;
+        margin: auto;
+      }
+    }
+    .welcom{
+      font-family: 'cera_promedium';
+      display: inline-block;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 114%;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: $gray-shade;
+      margin-bottom: 7px;
+    }
+    .greenshop_information{
+      font-family: "Cera Pro", sans-serif;
+      max-width: 557px;
+      padding: 40px;
+      @include max-screen(820px){
+        max-width: 380px;
+      }
+    }
+    .slogan{
+      font-weight: 900;
+      font-size: 70px;
+      line-height: 100%;
+      text-transform: uppercase;
+      color: $gray-shade;
+      margin-bottom: 5px;
+      @include max-screen(820px){
+        font-weight: 900;
+        font-size: 60px;
+      }
+    }
+    .planet{
+      color: $main-color;
+    }
+    .shop_description{
+      font-family: 'cera_proregular';
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 171%;
+      color: #727272;
+      margin-bottom: 44px;
+    }
+    .shop_now{
+      font-family: 'cera_probold';
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 125%;
+      padding: 11px 27px;
+      text-transform: uppercase;
+      color: #fff;
+      border-radius: 6px;
+      background: $main-color;
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      span {
+        position: relative;
+        z-index: 1;
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: #2b6f3a;
+        z-index: 0;
+      }
+      &:hover::before {
+        animation: fill 1s;
+      }
+    }
+  }
+  .product{
+    .main_content_flex{
+      flex-wrap: wrap;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 90px;
+    }
+    .left_side{
+      @include max-screen(1024px){
+        margin: auto;
+        margin-bottom: 20px;
+      }
+      max-width: 320px;
+      background: #fbfbfb;
+    }
+    .categories{
+      font-family: 'cera_proregular';
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 89%;
+      color: $gray-shade;
+      margin-bottom: 7px;
+      margin-left: 18px;
+      padding-top: 14px;
+    }
+    .plants_kinds{
+      margin-bottom: 240px;
+      li{
+        margin-left: 30px;
+        font-family: 'cera_prolight';
+        margin-bottom: 7px;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 267%;
+        color: $main-color;
+        a{
+          color: $gray-shade;
+          transition: 0.4s;
+          &:hover{
+            color: $main-color;
+          }
+        }
+      }
+    }
+    .right-side{
+      max-width: 840px;
+      @include max-screen(1024px){
+        margin: auto;
+      }
+      @include max-screen(540px){
+        padding: 0 10px;
+      }
+    }
+    .sorting{
+      font-family: 'cera_proregular';
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 107%;
+      color: $gray-shade;
+    }
+    .main_product_items{
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      @include max-screen(820px){
+        padding: 6px;
+      }
+      @include max-screen(540px){
+        justify-content: center;
+      }
+      ul {
+        position: absolute;
+        display: none;
+        gap: 10px;
+        bottom: 57px;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 125px;
+      }
+      li{
+        background-color: white;
+        border-radius: 4px;
+        padding: 6px;
+      }
+    }
+    article{
+      max-width: 258px;
+      margin-bottom: 70px;
+      border-top: solid 1px transparent;
+      position: relative;
+      @include max-screen(540px){
+        &:not(:nth-of-type(2n)){
+          margin-right: 10px;
+        }
+      }
+      .sale{
+        position: absolute;
+        background-color: $main-color;
+        padding: 7px 9px;
+        left: 0;
+        top: 14px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 100%;
+        color: #fff;
+        font-family: 'cera_promedium';
+      }
+      &:hover {
+        border-top: solid 1px $main-color;
+        ul{
+          display: flex;
+        }
+      }
+    }
+    .price{
+      font-family: 'cera_probold';
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 89%;
+      color: $main-color;
+      span{
+        font-family: 'cera_proregular';
+        text-decoration: line-through;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 89%;
+        color: #a5a5a5;
+        margin-left: 17px;
+      }
+    }
+    .product_img{
+      background: #fbfbfb;
+      margin-bottom: 12px;
+    }
+    .product_name{
+      font-family: 'cera_proregular';
+      margin-bottom: 6px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 100%;
+      color: $gray-shade;
+    }
+    .product_sort{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 107%;
+      flex-wrap: wrap;
+      color: $gray-shade;
+      @include max-screen(1024px){
+        justify-content: center;
+        margin-bottom: 12px;
+      }
+      ul{
+        display: flex;
+      }
+      li{
+        font-family: 'cera_proregular';
+        margin-right: 40px;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 107%;
+        color: $gray-shade;
+        @include max-screen(430px){
+          margin: 0 16px;
+        }
+        a{
+          transition: 0.4s;
+          &:hover{
+            color: $main-color;
+          }
+        }
+        &:after{
+          display: block;
+          width: 0;
+          content: "";
+          background-color: $main-color;
+          height: 3px;
+          margin-top: 1px;
+          transition: 0.4s;
+        }
+        &:hover{
+          &:after{
+            width: 100%;
+          }
+        }
+      }
+      p{
+        &:after{
+          content: "";
+          display: inline-block;
+          width: 16px;
+          height: 12px;
+          background-image: url("../img/Arrow - Down 2.svg");
+          margin-left: 2px;
+        }
+      }
+    }
+  }
+  .information{
+    margin-bottom: 138px;
+    .container{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      @include max-screen(820px){
+        justify-content: center;
+      }
+    }
+    img{
+      @include max-screen(540px){
+        width: 90%;
+      }
+      @include max-screen(430px){
+        width: 60%;
+      }
+    }
+    a{
+      display: inline-flex;
+      align-items: center;
+      font-family: 'cera_prolight';
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 125%;
+      padding: 11px 28px;
+      color: #fff;
+      border-radius: 6px;
+      background: $main-color;
+      @include max-screen(430px){
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+      &:after{
+        content: "";
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background-image: url("../img/Arrow - Right.svg");
+        margin-right: 6px;
+      }
+    }
+    article{
+      @include max-screen(1024px){
+        max-width: 500px;
+        margin-bottom: 64px;
+        padding: 10px 0;
+      }
+      @include max-screen(820px){
+        max-width: 586px;
+        margin-bottom: 64px;
+        padding: 10px 0;
+      }
+      @include max-screen(540px){
+        margin-bottom: 64px;
+        padding: 10px 0;
+      }
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: right;
+      max-width: 586px;
+      background: #fbfbfb;
+    }
+    h4{
+      font-family: 'cera_problack';
+      font-weight: 900;
+      font-size: 18px;
+      line-height: 133%;
+      text-transform: uppercase;
+      text-align: right;
+      color: $gray-shade;
+      margin-bottom: 9px;
+    }
+    p{
+      font-family: 'cera_prolight';
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 171%;
+      text-align: right;
+      color: #727272;
+      margin-bottom: 25px;
+    }
+    .product_overview{
+      max-width: 292px;
+      margin-right: 30px;
+    }
+  }
+  .blog_posts{
+    margin-bottom: 100px;
+    .container{
+      padding-bottom: 100px;
+    }
+    h2{
+      font-family: 'cera_probold';
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 53%;
+      text-align: center;
+      color: $gray-shade;
+      margin-bottom: 15px;
+      @include max-screen(430px){
+        font-size: 28px;
+      }
+    }
+    .online_plant_shop{
+      font-family: 'cera_proregular';
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 171%;
+      text-align: center;
+      color: #727272;
+      margin-bottom: 35px;
+      @include max-screen(430px){
+        padding: 0 4px;
+      }
+    }
+    .posts{
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      @include max-screen(1024px){
+        justify-content: space-around;
+      }
+      @include max-screen(540px){
+        justify-content: center;
+      }
+      article{
+        max-width: 268px;
+        padding-bottom: 13px;
+        background: #fbfbfb;
+        @include max-screen(1024px){
+          &:not(:last-of-type){
+            margin-bottom: 34px;
+          }
+        }
+        @include max-screen(540px){
+          &:not(:nth-of-type(2n)){
+            margin-right: 3px;
+          }
+        }
+        @include max-screen(430px){
+          margin-bottom: 35px;
+        }
+      }
+    }
+    .article_information{
+      text-align: left;
+      margin-left: 15px;
+      @include max-screen(540px){
+        margin-left: 10px;
+      }
+    }
+    .green_text{
+      font-family: 'cera_promedium';
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 114%;
+      color: $main-color;
+      margin-bottom: 4px;
+    }
+    h3{
+      font-family: 'cera_probold';
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 130%;
+      color: $gray-shade;
+      margin-bottom: 9px;
+      @include max-screen(540px){
+        font-size: 17px;
+      }
+    }
+    img{
+      margin-bottom: 9px;
+    }
+    .article_text{
+      font-family: 'cera_proregular';
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 157%;
+      color: #727272;
+      margin-bottom: 9px;
+    }
+    a{
+      font-family: 'cera_promedium';
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 114%;
+      color: $gray-shade;
+      display: flex;
+      align-items: center;
+      &:hover{
+        color: $main-color;
+        &:after{
+          background-image: url("../img/ArrowStraight - RightGreen.svg");
+        }
+      }
+      &:after{
+        content: "";
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background-image: url("../img/ArrowStraight - Right.svg");
+        margin-right: 9px;
+        transition: 0.4s;
+      }
+    }
+  }
+  .contact_data{
+    .data{
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background: #fbfbfb;
+      @include max-screen(540px){
+        justify-content: center;
+      }
+      article{
+        position: relative;
+        max-width: 204px;
+        @include max-screen(430px) {
+          &:last-of-type {
+            margin-bottom: 64px;
+          }
+        }
+          @include max-screen(820px){
+              margin-bottom: 64px;
+          }
+        &:not(:last-of-type){
+          &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 70%;
+            width: 187px;
+            height: 1px;
+            background: rgba(70, 163, 88, 0.1);
+            transform: rotate(90deg);
+            @include max-screen(1024px){
+              left: 55%;
+            }
+            @include max-screen(820px){
+              left: 70%;
+            }
+            @include max-screen(540px){
+              display: none;
+            }
+          }
+        }
+        img{
+          margin-bottom: 15px;
+        }
+        p{
+          font-family: cera_proregular;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 157%;
+          color: #727272;
+        }
+        h4{
+          font-family: 'cera_probold';
+          font-weight: 700;
+          font-size: 17px;
+          line-height: 94%;
+          color: $gray-shade;
+          margin-bottom: 9px;
+        }
+      }
+    }
+    .form_desc{
+      max-width: 354px;
+      @include max-screen(1024px){
+        max-width: 320px;
+      }
+      @include max-screen(820px){
+        max-width: 354px;
+        margin: auto;
+      }
+      @include max-screen(430px){
+        max-width: 96%;
+      }
+      h4{
+        font-family: 'cera_probold';
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 89%;
+        color: $gray-shade;
+        margin-bottom: 25px;
+      }
+      p{
+        font-family: cera_proregular;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 169%;
+        color: #727272;
+      }
+    }
+    form{
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
+      input{
+        border-radius: 6px 0 0 6px;
+        width: 354px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.06);
+        background: #fff;
+        border: none;
+        font-family: cera_proregular;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 114%;
+        color: #acacac;
+        padding-left: 11px;
+      }
+      button{
+        border-radius: 0 6px 6px 0;
+        width: 85px;
+        background: $main-color;
+        border: none;
+        font-family: 'cera_probold';
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 89%;
+        color: #fff;
+        padding: 12px 25px;
+      }
+    }
+    .gradient{
+      background: linear-gradient(90deg, #edf6ef 0%, #52c368 100%);
+      padding: 23px;
+      ul{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        @include max-screen(540px){
+          justify-content: center;
+          flex-direction: column;
+        }
+      }
+      li{
+        max-width: 205px;
+        font-family: cera_proregular;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 157%;
+        color: $gray-shade;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @include max-screen(540px){
+          margin-bottom: 10px;
+        }
+      }
+      li.location{
+        &:before {
+          content: "";
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background-image: url('../img/Icon.svg');
+          background-size: contain;
+          background-repeat: no-repeat;
+          padding-right: 14px;
+        }
+      }
+      li.email_info{
+        &:before {
+          content: "";
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background-image: url('../img/Icon (1).svg');
+          background-size: contain;
+          background-repeat: no-repeat;
+          padding-right: 8px;
+        }
+      }
+      li.phone{
+        &:before {
+          content: "";
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background-image: url('../img/Icon (2).svg');
+          background-size: contain;
+          background-repeat: no-repeat;
+          padding-right: 8px;
+        }
+      }
+    }
+  }
+}
+.container{
+  max-width: 1200px;
+  margin: auto;
+  .list_pager{
+    font-family: 'cera_proregular';
+    @include max-screen(1024px){
+      margin-bottom: 64px;
+      justify-content: center;
+    }
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+    max-width: 100%;
+    margin-bottom: 94px;
+    li{
+      a{
+        font-family: 'cera_proregular';
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 175%;
+        color: $gray-shade;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        transition: 0.4s;
+        &:hover{
+          background-color: $main-color;
+          color: white;
+        }
+      }
+      &:last-of-type{
+        a{
+          background-image: url("../img/Arrow - Right 2.svg");
+          background-size: contain;
+        }
+        &:hover{
+          a{
+            background-image: url("../img/Arrow - Right_white.svg");
+          }
+        }
+      }
+    }
+  }
+}
+.product{
+  .main_product_items{
+    li.image1{
+      a{
+        &:before {
+          content: "";
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background-image: url("../img/shopping 1.svg");
+          transition: 0.4s;
+        }
+        &:hover{
+          &:before{
+            background-image: url('../img/shopping 1 Green.svg');
+          }
+        }
+      }
+    }
+    li.image2{
+      a{
+        &:before {
+          content: "";
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background-image: url('../img/heart 1.svg');
+        }
+        &:hover{
+          &:before{
+            background-image: url('../img/heart 1 Green.svg');
+          }
+        }
+      }
+    }
+    li.image3{
+      a{
+        &:before {
+          content: "";
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background-image: url('../img/Frame.svg');
+        }
+        &:hover{
+          &:before{
+            background-image: url('../img/Frame Green.svg');
+          }
+        }
+      }
+    }
+  }
+}
+footer{
+  .container{
+    background: #fbfbfb;
+    display: flex;
+    justify-content: space-between;
+    padding: 33px 25px;
+    position: relative;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+    &::after{
+      content: "";
+      position: absolute;
+      bottom: 1px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(70, 163, 88, 0.2);
+    }
+  }
+  .lists{
+    h4{
+      font-family: cera_proregular;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 89%;
+      color: $gray-shade;
+      padding-bottom: 8px;
+      @include max-screen(430px){
+        font-size: 16px;
+      }
+    }
+    li{
+      font-family: cera_proregular;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 214%;
+      color: $gray-shade;
+      transition: 0.3s;
+      a{
+        &:hover {
+          color: $main-color;
+        }
+      }
+    }
+  }
+  .media{
+    @include max-screen(540px){
+      margin: auto;
+      margin-top: 24px;
+    }
+    .social_media{
+      font-family: cera_proregular;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 89%;
+      color: $gray-shade;
+      padding-bottom: 20px;
+      @include max-screen(540px){
+        text-align: center;
+      }
+      @include max-screen(430px){
+        text-align: center;
+        font-size: 16px;
+      }
+    }
+    .payments{
+      font-family: cera_proregular;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 89%;
+      color: $gray-shade;
+      padding-bottom: 13px;
+      @include max-screen(540px){
+        text-align: center;
+      }
+      @include max-screen(430px){
+        text-align: center;
+        font-size: 16px;
+      }
+    }
+    ul{
+      display: flex;
+      justify-content: space-between;
+      max-width: 190px;
+      margin-bottom: 33px;
+      @include max-screen(540px){
+        margin: 0 auto 33px;
+      }
+    }
+    li{
+      a{
+        border: 1px solid rgba(70, 163, 88, 0.2);
+        border-radius: 4px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .icon {
+          width: 60%;
+          height: 60%;
+        }
+      }
+    }
+  }
+  .rights{
+    font-family: 'cera_proregular';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 214%;
+    color: $gray-shade;
+    text-align: center;
+    margin-bottom: 22px;
+  }
+}
+header{
+  nav{
+    .dropdown{
+      position: relative;
+      &:hover{
+        .sub_menu{
+          display: flex;
+        }
+      }
+    }
+    .sub_menu{
+      position: absolute;
+      min-width: 188px;
+      flex-direction: column;
+      gap: 0;
+      top: 40px;
+      display: none;
+      padding-top: 20px;
+      li{
+        background-color: #edf6ee;
+        &:after{
+          display: none;
+        }
+        &:hover {
+          background-color: #1a712a;
+        }
+        &:hover > a {
+          color: #fff;
+        }
+      }
+      a{
+        padding: 7px 14px;
+        display: block;
+        font-family: 'cera_proregular';
+        font-weight: 400;
+        font-size: 16px;
+        color: $gray-shade;
+      }
+      li.dropdown_2{
+        &:after{
+          content: "";
+          display: block;
+          background-image: url("../img/Frame 9.svg");
+          width: 7px;
+          height: 10px;
+          position: absolute;
+          top: 10px;
+          right: 19px;
+          margin-top: 0;
+          transition: 0.2s;
+          background-color: #edf6ee;
+        }
+        &:hover{
+          &:after{
+            transform: rotate(180deg);
+            background-color: #1a712a;
+            background-image: url("../img/Frame 9White.svg");
+          }
+        }
+      }
+    }
+    .dropdown_2{
+      position: relative;
+      &:hover{
+        .sub_menu_2{
+          display: flex;
+        }
+      }
+      li{
+        &:hover{
+          background-color: #1a712a;
+          a{
+            color: #fff;
+          }
+        }
+      }
+    }
+    .sub_menu_2{
+      position: absolute;
+      min-width: 188px;
+      flex-direction: column;
+      gap: 0;
+      top: -110px;
+      left: 100%;
+      display: none;
+      padding-top: 20px;
+      padding-left: 2px;
+    }
+  }
+}
+.box {
+  max-width: 500px;
+  border: solid 2px black;
+  margin: auto;
+  padding: 50px 100px;
+  h1 {
+    max-width: 157px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'cera_promedium';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 80%;
+    color: #3d3d3d;
+    margin: auto;
+    margin-bottom: 40px;
+    position: relative;
+    span{
+      color: #46a358
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 42%;
+      transform: translate(-50%, -50%);
+      width: 1px;
+      height: 12px;
+      background-color: #3d3d3d;
+    }
+  }
+  p {
+    font-family: 'cera_proregular';
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 123%;
+    color: #3d3d3d;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  form {
+    width: 300px;
+    margin: auto;
+    text-align: center;
+    input {
+      font-family: 'cera_proregular';
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 114%;
+      color: #a5a5a5;
+      border: 1px solid #eaeaea;
+      border-radius: 5px;
+      width: 300px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+    button {
+      border: 1px solid #46a358;
+      border-radius: 5px;
+      width: 300px;
+      padding: 15px 118px;
+      background: #46a358;
+      margin-bottom: 36px;
+      font-family: 'cera_proregular';
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 100%;
+      color: #fff;
+    }
+  }
+  .register {
+    width: 300px;
+    font-family: 'cera_promedium';
+    margin-bottom: 27px;
+    text-align: center;
+    position: relative;
+    &::before{
+      content: "";
+      position: absolute;
+      border: 1px solid #eaeaea;
+      width: 95px;
+      height: 0;
+      top: 50%;
+      left: 0;
+    }
+    &::after{
+      content: "";
+      position: absolute;
+      border: 1px solid #eaeaea;
+      width: 95px;
+      height: 0;
+      top: 50%;
+      right: 0;
+    }
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #727272;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 15px;
+    font-family: 'cera_promedium';
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 123%;
+    text-align: center;
+    img {
+      width: 20px;
+      height: 20px;
+      margin-right: 9px;
+    }
+  }
+}
+
+
+
